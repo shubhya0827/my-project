@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jijamata Nursing School</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    * {
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      scroll-behavior: smooth;
+      background-color: #f5f7fb;
+    }
+
+    /* Smooth page fade-in */
+    body {
+      opacity: 0;
+      animation: pageFadeIn 0.8s ease-out forwards;
+    }
+
+    @keyframes pageFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Navbar */
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.92) !important;
+      backdrop-filter: blur(12px);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: #ffffff !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand span {
+      color: #0d6efd;
+    }
+
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: #0d6efd;
+      transition: width 0.25s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(circle at top left, #e7f0ff 0, #f5f7fb 40%, #ffffff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    .hero::before {
+      width: 280px;
+      height: 280px;
+      background: #cfe2ff;
+      top: -60px;
+      right: -40px;
+      animation: float1 6s ease-in-out infinite alternate;
+    }
+
+    .hero::after {
+      width: 220px;
+      height: 220px;
+      background: #b6f0ff;
+      bottom: -60px;
+      left: -40px;
+      animation: float2 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes float1 {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(20px);
+      }
+    }
+
+    @keyframes float2 {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(-20px);
+      }
+    }
+
+    .hero-overlay {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+    }
+
+    .hero-overlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13, 110, 253, 0.16), transparent);
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      line-height: 1.2;
+      animation: slideUp 0.8s ease-out 0.3s both;
+    }
+
+    @media (min-width: 992px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+    }
+
+    .hero-subtitle {
+      animation: fadeIn 0.8s ease-out 0.5s both;
+    }
+
+    .hero-cta {
+      animation: fadeIn 0.8s ease-out 0.7s both;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .hero-img {
+      animation: floatImg 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatImg {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(-10px);
+      }
+    }
+
+    .badge-pill {
+      border-radius: 50rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 4rem 0;
+    }
+
+    section:nth-of-type(even) {
+      background-color: #f8f9fa;
+    }
+
+    .section-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .section-underline {
+      width: 60px;
+      height: 3px;
+      background-color: #0d6efd;
+      border-radius: 50px;
+      margin: 0.25rem auto 2rem;
+    }
+
+    /* Cards */
+    .feature-card,
+    .course-card,
+    .contact-card {
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 3px 18px rgba(15, 23, 42, 0.08);
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .feature-card::before,
+    .course-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13, 110, 253, 0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: -1;
+    }
+
+    .feature-card:hover,
+    .course-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.16);
+    }
+
+    .feature-card:hover::before,
+    .course-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Stats */
+    .stats-number {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #0d6efd;
+    }
+
+    /* Scroll animation utility */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all 0.6s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #02142b;
+      color: #e9ecef;
+      padding: 2rem 0 1rem;
+    }
+
+    footer a {
+      color: #adb5bd;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        Jijamata <span>Nursing School</span>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        id="navbarNav"
+      >
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#courses">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#facilities">Facilities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#admissions">Admissions</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link btn btn-primary text-white ms-lg-3 px-3 py-1"
+              href="#contact"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="hero">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="hero-overlay">
+            <div class="row align-items-center g-4">
+              <div class="col-lg-7">
+                <span
+                  class="badge bg-light text-primary border border-primary badge-pill mb-3 hero-subtitle"
+                >
+                  Caring Hands. Skilled Minds.
+                </span>
+                <h1 class="hero-title fw-bold mb-3">
+                  Building the next generation of professional nurses.
+                </h1>
+                <p class="text-muted mb-4 hero-subtitle">
+                  Jijamata Nursing School provides quality nursing education,
+                  clinical exposure, and holistic development to create
+                  compassionate healthcare professionals.
+                </p>
+                <div class="d-flex flex-wrap gap-2 hero-cta">
+                  <a href="#admissions" class="btn btn-primary px-4">
+                    Apply Now
+                  </a>
+                  <a href="#courses" class="btn btn-outline-primary px-4">
+                    View Courses
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-5 text-center">
+                <img
+                  src="./Assect/nur.jpg"
+                  class="img-fluid rounded-4 shadow-sm hero-img"
+                  alt="Nursing students"
+                />
+                <div class="mt-3 small text-muted">
+                  Affiliated nursing programs with strong clinical partnerships.
+                </div>
+              </div>
+            </div>
+
+            <div class="row text-center mt-4 g-3">
+              <div class="col-4 col-md-3">
+                <div class="stats-number">15+</div>
+                <div class="small text-muted">Years of excellence</div>
+              </div>
+              <div class="col-4 col-md-3">
+                <div class="stats-number">1000+</div>
+                <div class="small text-muted">Graduated nurses</div>
+              </div>
+              <div class="col-4 col-md-3">
+                <div class="stats-number">20+</div>
+                <div class="small text-muted">Clinical partners</div>
+              </div>
+              <div class="col-12 col-md-3 mt-2 mt-md-0">
+                <div class="stats-number">95%</div>
+                <div class="small text-muted">Placement rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="reveal">
+    <div class="container">
+      <h2 class="text-center section-title">About Jijamata Nursing School</h2>
+      <div class="section-underline"></div>
+
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <p class="text-muted">
+            Jijamata Nursing School is dedicated to preparing competent and
+            compassionate nurses through a balanced blend of classroom teaching,
+            simulation-based learning, and clinical training in reputed
+            hospitals.
+          </p>
+          <p class="text-muted">
+            The curriculum emphasizes patient-centered care, ethical practice,
+            and lifelong learning to meet the growing demands of modern
+            healthcare systems.
+          </p>
+          <ul class="list-unstyled mt-3">
+            <li>• Experienced and student-friendly faculty members</li>
+            <li>• Outcome-based curriculum aligned with modern healthcare needs</li>
+            <li>• Safe, supportive, and inclusive campus environment</li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="card feature-card h-100 position-relative">
+                <div class="card-body">
+                  <h6 class="fw-semibold mb-1">Vision</h6>
+                  <p class="small text-muted mb-0">
+                    To develop nursing professionals who deliver safe, ethical,
+                    and evidence-based care.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card feature-card h-100 position-relative">
+                <div class="card-body">
+                  <h6 class="fw-semibold mb-1">Mission</h6>
+                  <p class="small text-muted mb-0">
+                    To provide quality nursing education with a focus on
+                    clinical competence and human values.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card feature-card position-relative">
+                <div class="card-body">
+                  <h6 class="fw-semibold mb-1">Core Values</h6>
+                  <p class="small text-muted mb-1">
+                    Compassion • Integrity • Professionalism • Teamwork.
+                  </p>
+                  <p class="small text-muted mb-0">
+                    Students are encouraged to adopt patient-first attitudes
+                    and uphold high standards of nursing practice at all times.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses -->
+  <section id="courses" class="reveal">
+    <div class="container">
+      <h2 class="text-center section-title">Courses Offered</h2>
+      <div class="section-underline"></div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card course-card h-100 position-relative">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">
+                General Nursing & Midwifery (GNM)
+              </h5>
+              <p class="card-text text-muted small">
+                A comprehensive program that prepares students for a wide range
+                of roles in hospitals, community health centers, and clinics.
+              </p>
+              <ul class="small text-muted">
+                <li>Duration: 3 years</li>
+                <li>Eligibility: 10+2 (Science preferred)</li>
+                <li>Includes supervised clinical postings</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card course-card h-100 position-relative">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">
+                Auxiliary Nurse Midwife (ANM)
+              </h5>
+              <p class="card-text text-muted small">
+                Focuses on maternal and child health, community-based care, and
+                primary healthcare delivery.
+              </p>
+              <ul class="small text-muted">
+                <li>Duration: 2 years</li>
+                <li>Eligibility: 10+2 (any stream)</li>
+                <li>Ideal for community health services</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card course-card h-100 position-relative">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">
+                Certificate & Value-added Programs
+              </h5>
+              <p class="card-text text-muted small">
+                Short-term training in key areas to enhance skills and
+                employability of nursing students.
+              </p>
+              <ul class="small text-muted">
+                <li>Basic life support (BLS)</li>
+                <li>Infection control practices</li>
+                <li>Communication & soft skills</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities -->
+  <section id="facilities" class="reveal">
+    <div class="container">
+      <h2 class="text-center section-title">Campus & Facilities</h2>
+      <div class="section-underline"></div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="card feature-card h-100 position-relative">
+            <div class="card-body">
+              <h6 class="fw-semibold mb-2">Modern Laboratories</h6>
+              <p class="small text-muted mb-0">
+                Well-equipped nursing foundation, anatomy, and community health
+                labs for hands-on practice and demonstration.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card feature-card h-100 position-relative">
+            <div class="card-body">
+              <h6 class="fw-semibold mb-2">Library & E-resources</h6>
+              <p class="small text-muted mb-0">
+                Access to standard nursing textbooks, journals, and digital
+                learning resources with quiet study spaces.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card feature-card h-100 position-relative">
+            <div class="card-body">
+              <h6 class="fw-semibold mb-2">Clinical Tie-ups</h6>
+              <p class="small text-muted mb-0">
+                Rotational postings in partnered hospitals to build clinical
+                competence and confidence in patient care.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card feature-card h-100 position-relative">
+            <div class="card-body">
+              <h6 class="fw-semibold mb-2">Hostel & Support</h6>
+              <p class="small text-muted mb-0">
+                Safe hostel facilities, mentorship, and student support services
+                for overall well-being and growth.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admissions -->
+  <section id="admissions" class="reveal">
+    <div class="container">
+      <h2 class="text-center section-title">Admissions</h2>
+      <div class="section-underline"></div>
+
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-6">
+          <h5 class="fw-semibold mb-2">Eligibility & Process</h5>
+          <ul class="text-muted small">
+            <li>Applicants must have passed 10+2 from a recognized board.</li>
+            <li>Minimum aggregate percentage as per regulatory guidelines.</li>
+            <li>Selection may include entrance test and/or personal interview.</li>
+            <li>Medical fitness certificate required at the time of admission.</li>
+          </ul>
+          <p class="text-muted small mb-1">
+            Detailed admission notifications, important dates, and fee structure
+            will be published on the notice board and official channels.
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <h5 class="fw-semibold mb-2">Why Choose Jijamata?</h5>
+          <ul class="text-muted small">
+            <li>Student-centered teaching with regular mentoring.</li>
+            <li>Balanced focus on academics, skills, and ethics.</li>
+            <li>Support for competitive exams and career planning.</li>
+            <li>Opportunities for community projects and health camps.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="reveal">
+    <div class="container">
+      <h2 class="text-center section-title">Contact Us</h2>
+      <div class="section-underline"></div>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card contact-card h-100">
+            <div class="card-body p-4">
+              <h5 class="fw-semibold mb-3">Get in touch</h5>
+              <form>
+                <div class="mb-3">
+                  <label class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email Address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Phone Number</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="+91-XXXXXXXXXX"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Message</label>
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    placeholder="Your query about courses or admissions"
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary px-4">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card contact-card h-100">
+            <div class="card-body p-4">
+              <h5 class="fw-semibold mb-3">College Address</h5>
+              <p class="small text-muted mb-2">
+                Jijamata Nursing School<br />
+                At, Dnyaneshwar Nagar, Po. Bhende, Tal. Newasa, Dist. Ahmednagar.<br />
+                Maharashtra, India
+              </p>
+              <p class="small text-muted mb-2">
+                Phone: +91-XXXXXXXXXX<br />
+                Email: info@jijamatanursingschool.in
+              </p>
+              <p class="small text-muted">
+                Office Hours: Monday to Saturday, 9:00 AM – 4:00 PM
+              </p>
+
+              <h6 class="fw-semibold mt-4 mb-2">Location Map</h6>
+              <div class="ratio ratio-16x9">
+                <!-- Replace src with actual Google Maps embed URL -->
+                <iframe
+                  src="https://www.google.com/maps/embed?pb="
+                  style="border: 0"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-5">
+    <div class="container">
+      <div
+        class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2"
+      >
+        <p class="small mb-0">
+          © <span id="year"></span> Jijamata Nursing School. All rights
+          reserved.
+        </p>
+        <p class="small mb-0 text-center text-md-end">
+          Designed for responsive viewing on mobile, tablet, and desktop.<br />
+          - Designed By Mr. Shubham Wahule
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Dynamic year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // Navbar background on scroll
+    const navbar = document.querySelector(".navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+
+    // Simple scroll reveal
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    reveals.forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
